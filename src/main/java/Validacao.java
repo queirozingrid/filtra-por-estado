@@ -1,6 +1,12 @@
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.*;
 
 public class Validacao {
+    EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("estados");
+    EntityManager entitymanager = emfactory.createEntityManager();
 
     public String validaNome(){
         int i, cont = 0;
@@ -55,4 +61,34 @@ public class Validacao {
         }
         return idade;
     }
+
+    public Estado validaEstado(){
+        boolean validacao = false;
+        Estado estado = new Estado();
+        while(!validacao){
+            System.out.println("Agora digite seu estado");
+            Scanner scan = new Scanner(System.in);
+            String estadoStr = scan.next();
+
+            String jpql = "select e from Estado e where e.sigla = :sigla";
+
+            Query select = entitymanager.createQuery(jpql, Estado.class).setParameter("sigla", estadoStr.toUpperCase());
+
+            List<Estado> estados = select.getResultList();
+            if(estados.size()>0){
+                estado = estados.get(0);
+                validacao = true;
+
+            }
+            else {
+                System.out.println("estado inválido!! Vamos tentar novamente!\n");
+                validacao = false;
+            }
+
+        }
+        return estado;
+
+
+    }
+
 }
