@@ -90,5 +90,21 @@ public class Validacao {
 
 
     }
+    public int validaOpcao(){
+        int opcao = 0;
+        Scanner scan;
+        boolean validaOpcao = false;
+
+        while (!validaOpcao){
+            try{
+                scan = new Scanner(System.in);
+                opcao = scan.nextInt();
+                validaOpcao = true;
+            } catch (InputMismatchException e){
+                System.out.println("Digite um número!!!");
+            }
+        }
+        return opcao;
+    }
 
 }

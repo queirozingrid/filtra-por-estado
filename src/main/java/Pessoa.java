@@ -10,11 +10,11 @@ public class Pessoa {
     private int id;
     private String nome;
 
-    public Pessoa(String nome, Estado estado, int idade) {
-        this.nome = nome;
-        this.estado = estado;
-        this.idade = idade;
-    }
+//    public Pessoa(String nome, Estado estado, int idade) {
+//        this.nome = nome;
+//        this.estado = estado;
+//        this.idade = idade;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "estado_id")

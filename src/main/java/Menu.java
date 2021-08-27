@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Menu {
     public void escolher(){
         Scanner scan = new Scanner(System.in);
-        int opcao = 0;
-        boolean validaOpcao = false;
+        int opcao;
+
 
         System.out.println("*************** MENU ***************");
         System.out.println("Digite a opção que deseja realizar");
@@ -17,15 +17,9 @@ public class Menu {
         System.out.println("4. Visualizar todos os cadastros");
         System.out.println("5. Sair");
 
-        while (!validaOpcao){
-            try{
-                scan = new Scanner(System.in);
-                opcao = scan.nextInt();
-                validaOpcao = true;
-            } catch (InputMismatchException e){
-                System.out.println("Digite um número!!!");
-            }
-        }
+        Validacao validacao = new Validacao();
+        opcao = validacao.validaOpcao();
+
         if(opcao < 1 || opcao > 5){
             System.out.println("Opção inválida!!");
             Menu menu = new Menu();
@@ -38,6 +32,10 @@ public class Menu {
         else if(opcao==2){
             PessoaOperacoes op = new PessoaOperacoes();
             op.removerPessoa();
+        }
+        else if(opcao==3){
+            PessoaOperacoes op = new PessoaOperacoes();
+            op.atualizarCadastro();
         }
 
     }
