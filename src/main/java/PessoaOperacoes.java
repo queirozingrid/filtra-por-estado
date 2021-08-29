@@ -107,6 +107,73 @@ public class PessoaOperacoes {
 
     }
     public void atualizarCadastro(){
+        int opcao;
+        int opcaoAtualizar = 0;
+        boolean validaOpcao = false;
 
+        String jpql = "select p from Pessoa p";
+        Query select = entitymanager.createQuery(jpql, Pessoa.class);
+        List<Pessoa> pessoas = select.getResultList();
+
+        for (Pessoa p: pessoas) {
+            System.out.println(p.getId() + ". " + p.getNome() + ", " + p.getIdade() + " anos, Estado: " + p.getEstado().getSigla());
+        }
+        
+        Validacao validacao = new Validacao();
+        List<Pessoa> pessoas1 = null;
+
+        while (!validaOpcao){
+            System.out.println("Escolha pelo número o cadastro que deseja atualizar");
+            opcaoAtualizar = validacao.validaOpcao();
+            Query atualiza = entitymanager.createQuery("select p from Pessoa p where p.id =:opcao").
+                    setParameter("opcao", opcaoAtualizar);
+
+            pessoas1 = atualiza.getResultList();
+
+            if(pessoas1.size()<1){
+                System.out.println("Opção inválida!!!");
+                validaOpcao = false;
+            }
+            else {
+                validaOpcao = true;
+            }
+            System.out.println("Escolha os campos que deseja alterar");
+            System.out.println("1. Apenas o nome");
+            System.out.println("2. Apenas o estado");
+            System.out.println("3. Nome e estado");
+            System.out.println("4. Cancelar operação");
+            
+            Validacao validacao1 = new Validacao();
+            opcao = validacao1.validaOpcao();
+            validaOpcao = false;
+
+            while (!validaOpcao){
+                if(opcao<1 || opcao>4){
+                    System.out.println("Opção inválida!!!");
+                    validaOpcao = false;
+                }
+                else {
+                    validaOpcao = true;
+                }
+            }
+            
+            if(opcao==1){
+            
+            }
+            
+            else if(opcao==2){
+            
+            }
+            
+            else if(opcao==3){
+            
+            }
+            
+            else if(opcao==4){
+                System.out.println("### Cancelando operação ... ###");
+            }
+            
+        }
+        
     }
 }
